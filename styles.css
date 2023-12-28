@@ -19,11 +19,21 @@
 }
 
 .screen {
-    height: 100px;
+    display: flex;
+    height: 80px;
     background-color: rgb(241, 242, 234);
     border: solid black 2px;
     border-radius: 5px;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    padding: 10px;
 
+}
+
+.screen-text {
+    font-size: 40px;
+    font-family: 'Audiowide', sans-serif;
+    font-weight: bold;
 }
 
 .delete-container {
