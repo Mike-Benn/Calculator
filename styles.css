@@ -1,0 +1,35 @@
+.page-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.calculator-body{
+    margin-top: 50px;
+    display: flex;
+    width: 405px;
+    height: 475px;
+    background-color: gray;
+    border: solid black 2px;
+    border-radius: 15px;
+    padding: 16px;
+    flex-direction: column;
+}
+
+.screen {
+    height: 100px;
+    background-color: #d3d3d3;
+    border: solid black 2px;
+    border-radius: 5px;
+
+}
+
+.delete-container {
+    display: flex;
+    height: 75px;
+}
+
+.clear , .delete {
+    width: 50px;
+}
