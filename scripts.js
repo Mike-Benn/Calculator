@@ -3,6 +3,8 @@ let firstNum = null;
 let secondNum = null;
 let lastButton = null;
 
+const MAXIMUM_NUMBER = 99999999999999;
+const MINIMUM_NUMBER = -99999999999999;
 const screenText = document.querySelector('.screen-text');
 const deleteBtn = document.querySelector('#delete-btn');
 const clearBtn = document.querySelector('#clear-btn');
@@ -22,7 +24,13 @@ const divideBtn = document.querySelector('#divide-btn');
 const addBtn = document.querySelector('#add-btn');
 const minusBtn = document.querySelector('#minus-btn');
 
+function equalsReset() {
+    lastButton = "equals";
+    firstNum = null;
+    secondNum = null;
+    operator = null;
 
+}
 
 function del() {
     deleteBtn.addEventListener('click' , () => {
@@ -47,35 +55,62 @@ function clear() {
 
 function operate() {
     if (operator === "/") {
-        screenText.textContent = (firstNum / secondNum) + "";
-        lastButton = "equals";
-        firstNum = null;
-        secondNum = null;
-        operator = null;
+        if (firstNum / secondNum > MAXIMUM_NUMBER) {
+            screenText.textContent = MAXIMUM_NUMBER + "";
+            equalsReset();
+
+        } else if (firstNum / secondNum < MINIMUM_NUMBER) {
+            screenText.textContent = MINIMUM_NUMBER + "";
+            equalsReset();
+
+        } else {
+            screenText.textContent = (firstNum / secondNum) + "";
+            equalsReset();
+
+        }
+
     } else if (operator === "x") {
-        screenText.textContent = (firstNum * secondNum) + "";
-        lastButton = "equals";
-        firstNum = null;
-        secondNum = null;
-        operator = null;
+        if (firstNum * secondNum > MAXIMUM_NUMBER) {
+            screenText.textContent = MAXIMUM_NUMBER + "";
+            equalsReset();
+        } else if (firstNum * secondNum < MINIMUM_NUMBER) {
+            screenText.textContent = MINIMUM_NUMBER + "";
+            equalsReset()
+        } else {
+            screenText.textContent = (firstNum * secondNum) + "";
+            equalsReset();
+        }
+
     } else if (operator === "+") {
-        screenText.textContent = (firstNum + secondNum) + "";
-        lastButton = "equals";
-        firstNum = null;
-        secondNum = null;
-        operator = null;
+        if (firstNum + secondNum > MAXIMUM_NUMBER) {
+            screenText.textContent = MAXIMUM_NUMBER + "";
+            equalsReset();
+        } else if (firstNum + secondNum < MINIMUM_NUMBER) {
+            screenText.textContent = MINIMUM_NUMBER + "";
+            equalsReset();
+        } else {
+            screenText.textContent = (firstNum + secondNum) + "";
+            equalsReset();
+        }
+        
     } else if (operator === "-") {
-        screenText.textContent = (firstNum - secondNum) + "";
-        lastButton = "equals";
-        firstNum = null;
-        secondNum = null;
-        operator = null;
+        if (firstNum - secondNum > MAXIMUM_NUMBER) {
+            screenText.textContent = MAXIMUM_NUMBER + "";
+            equalsReset();
+        } else if (firstNum - secondNum < MINIMUM_NUMBER) {
+            screenText.textContent = MINIMUM_NUMBER + "";
+            equalsReset();
+        } else {
+            screenText.textContent = (firstNum - secondNum) + "";
+            equalsReset();
+        }
+    
     }
 }
 
 function equals() {
     equalsBtn.addEventListener('click' , () => {
-        if (operator !== null && firstNum !== null) {
+        if (operator !== null && firstNum !== null && lastButton !== "operator") {
             secondNum = parseInt(screenText.textContent);
             operate();
         }
@@ -85,13 +120,41 @@ function equals() {
 function times() {
     timesBtn.addEventListener('click' , () => {
         
-        if (operator !== null && firstNum !== null) {
+        if (operator !== null && firstNum !== null && lastButton !== "operator") {
             secondNum = parseInt(screenText.textContent);
             operate();
             firstNum = parseInt(screenText.textContent);
             operator = "x";
             lastButton = "operator";
             
+        } else if (firstNum !== null && operator !== "x") {
+            operator = "x";
+            lastButton = "operator";
+
+        } else if (firstNum === null) {
+            firstNum = parseInt(screenText.textContent);
+            operator = "x";
+            lastButton = "operator";
+        
+        }
+            
+    })
+}
+
+function divide() {
+    divideBtn.addEventListener('click' , () => {
+        
+        if (operator !== null && firstNum !== null && lastButton !== "operator") {
+            secondNum = parseInt(screenText.textContent);
+            operate();
+            firstNum = parseInt(screenText.textContent);
+            operator = "x";
+            lastButton = "operator";
+            
+        } else if (firstNum !== null && operator !== "x") {
+            operator = "x";
+            lastButton = "operator";
+
         } else if (firstNum === null) {
             firstNum = parseInt(screenText.textContent);
             operator = "x";
@@ -105,13 +168,17 @@ function times() {
 function add() {
     addBtn.addEventListener('click' , () => {
         
-        if (operator !== null && firstNum !== null) {
+        if (operator !== null && firstNum !== null && lastButton !== "operator") {
             secondNum = parseInt(screenText.textContent);
             operate();
             firstNum = parseInt(screenText.textContent);
             operator = "+";
             lastButton = "operator";
             
+        } else if(firstNum !== null && operator !== "+") {
+            operator = "+";
+            lastButton = "operator";
+
         } else if (firstNum === null) {
             firstNum = parseInt(screenText.textContent);
             operator = "+";
@@ -125,13 +192,16 @@ function add() {
 function minus() {
     minusBtn.addEventListener('click' , () => {
         
-        if (operator !== null && firstNum !== null) {
+        if (operator !== null && firstNum !== null && lastButton !== "operator") {
             secondNum = parseInt(screenText.textContent);
             operate();
             firstNum = parseInt(screenText.textContent);
             operator = "-";
             lastButton = "operator";
             
+        } else if (firstNum !== null && operator !== "-") {
+            operator = "-";
+            lastButton = "operator";
         } else if (firstNum === null) {
             firstNum = parseInt(screenText.textContent);
             operator = "-";
@@ -144,14 +214,19 @@ function minus() {
 
 function numberOne() {
     oneBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length < 14) {
+        if (screenText.textContent.length <= 14) {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "1";
                 lastButton = "1";
+
             } else if (screenText.textContent === "0") {
                 screenText.textContent = "1";
-            } else {
+                lastButton = "1";
+
+            } else if (screenText.textContent.length < 14) {
                 screenText.textContent = screenText.textContent + "1";
+                lastButton = "1";
+
             }
         }
     })
@@ -163,10 +238,15 @@ function numberTwo() {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "2";
                 lastButton = "2";
+
             } else if (screenText.textContent === "0") {
                 screenText.textContent = "2";
-            } else {
+                lastButton = "2";
+
+            } else if (screenText.textContent.length < 14) {
                 screenText.textContent = screenText.textContent + "2";
+                lastButton = "2"
+
             }
         }
     })
@@ -174,14 +254,19 @@ function numberTwo() {
 
 function numberThree() {
     threeBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length < 14) {
+        if (screenText.textContent.length <= 14) {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "3";
                 lastButton = "3";
+                
             } else if (screenText.textContent === "0") {
                 screenText.textContent = "3";
-            } else {
+                lastButton = "3";
+                
+            } else if (screenText.textContent.length < 14) {
                 screenText.textContent = screenText.textContent + "3";
+                lastButton = "3";
+                
             }
         }
     })
@@ -193,10 +278,15 @@ function numberFour() {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "4";
                 lastButton = "4";
+
             } else if (screenText.textContent === "0") {
                 screenText.textContent = "4";
-            } else {
+                lastButton = "4";
+
+            } else if (screenText.textContent.length < 14) {
                 screenText.textContent = screenText.textContent + "4";
+                lastButton = "4"
+
             }
         }
     })
@@ -208,10 +298,15 @@ function numberFive() {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "5";
                 lastButton = "5";
+
             } else if (screenText.textContent === "0") {
                 screenText.textContent = "5";
-            } else {
+                lastButton = "5";
+
+            } else if (screenText.textContent.length < 14) {
                 screenText.textContent = screenText.textContent + "5";
+                lastButton = "5";
+
             }
         }
     })
@@ -223,10 +318,15 @@ function numberSix() {
             if(lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "6";
                 lastButton = "6";
+
             } else if (screenText.textContent === "0") {
                 screenText.textContent = "6";
-            } else {
+                lastButton = "6";
+
+            } else if (screenText.textContent.length < 14) {
                 screenText.textContent = screenText.textContent + "6";
+                lastButton = "6";
+
             }
         }
     })
@@ -238,10 +338,15 @@ function numberSeven() {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "7";
                 lastButton = "7";
+
             } else if (screenText.textContent === "0") {
                 screenText.textContent = "7";
-            } else {
+                lastButton = "7";
+
+            } else if (screenText.textContent.length < 14) {
                 screenText.textContent = screenText.textContent + "7";
+                lastButton = "7";
+
             }
         }
     })
@@ -253,10 +358,15 @@ function numberEight() {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "8";
                 lastButton = "8";
+
             } else if (screenText.textContent === "0") {
                 screenText.textContent = "8";
-            } else {
+                lastButton = "8";
+
+            } else if (screenText.textContent.length < 14) {
                 screenText.textContent = screenText.textContent + "8";
+                lastButton = "8";
+
             }
         }
     })
@@ -268,10 +378,15 @@ function numberNine() {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "9";
                 lastButton = "9";
+
             } else if (screenText.textContent === "0") {
                 screenText.textContent = "9";
-            } else {
+                lastButton = "9";
+
+            } else if (screenText.textContent.length < 14) {
                 screenText.textContent = screenText.textContent + "9";
+                lastButton = "9";
+
             }
         }
     })
