@@ -2,6 +2,7 @@ let operator = null;
 let firstNum = null;
 let secondNum = null;
 let lastButton = null;
+let decimalActive = false;
 
 const MAXIMUM_NUMBER = 99999999999999;
 const MINIMUM_NUMBER = -99999999999999;
@@ -24,6 +25,14 @@ const timesBtn = document.querySelector('#times-btn');
 const divideBtn = document.querySelector('#divide-btn');
 const addBtn = document.querySelector('#add-btn');
 const minusBtn = document.querySelector('#minus-btn');
+
+function checkDecimal() {
+    if (screenText.textContent.split(".").length > 1) {
+        decimalActive = true;
+    } else {
+        decimalActive = false;
+    } 
+}
 
 function equalsReset() {
     lastButton = "equals";
@@ -336,6 +345,8 @@ function minus() {
             
     })
 }
+
+
 
 function numberOne() {
     oneBtn.addEventListener('click' , () => {
