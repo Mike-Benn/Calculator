@@ -9,6 +9,7 @@ const screenText = document.querySelector('.screen-text');
 const deleteBtn = document.querySelector('#delete-btn');
 const clearBtn = document.querySelector('#clear-btn');
 const equalsBtn = document.querySelector('#equals-btn');
+const zeroBtn = document.querySelector('#zero-btn');
 const oneBtn = document.querySelector('#one-btn');
 const twoBtn = document.querySelector('#two-btn');
 const threeBtn = document.querySelector('#three-btn');
@@ -263,19 +264,38 @@ function numberOne() {
 
 function numberTwo() {
     twoBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length <= 14) {
-            if (lastButton === "operator" || lastButton === "equals") {
-                screenText.textContent = "2";
-                lastButton = "2";
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "2";
+                    lastButton = "2";
 
-            } else if (screenText.textContent === "0") {
-                screenText.textContent = "2";
-                lastButton = "2";
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "2";
+                    lastButton = "2";
+                    
+                } else if (screenText.textContent.length < 15) {
+                    screenText.textContent = screenText.textContent + "2";
+                    lastButton = "2";
+                    
+                }
+            }
 
-            } else if (screenText.textContent.length < 14) {
-                screenText.textContent = screenText.textContent + "2";
-                lastButton = "2"
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "2";
+                    lastButton = "2";
 
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "2";
+                    lastButton = "2";
+
+                } else if (screenText.textContent.length < 14) {
+                    screenText.textContent = screenText.textContent + "2";
+                    lastButton = "2";
+
+                }
             }
         }
     })
