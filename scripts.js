@@ -32,6 +32,15 @@ function equalsReset() {
 
 }
 
+function roundValue(str) {
+    if (str.length <= 14) {
+        return str;
+    } else {
+        strArray = str.split(".");
+        precision = str.length - strArray[0].length;
+    }
+}
+
 function del() {
     deleteBtn.addEventListener('click' , () => {
         if (screenText.textContent.length == 1) {
@@ -148,16 +157,16 @@ function divide() {
             secondNum = parseInt(screenText.textContent);
             operate();
             firstNum = parseInt(screenText.textContent);
-            operator = "x";
+            operator = "/";
             lastButton = "operator";
             
         } else if (firstNum !== null && operator !== "x") {
-            operator = "x";
+            operator = "/";
             lastButton = "operator";
 
         } else if (firstNum === null) {
             firstNum = parseInt(screenText.textContent);
-            operator = "x";
+            operator = "/";
             lastButton = "operator";
         
         }
@@ -198,6 +207,7 @@ function minus() {
             firstNum = parseInt(screenText.textContent);
             operator = "-";
             lastButton = "operator";
+            console.log("yo");
             
         } else if (firstNum !== null && operator !== "-") {
             operator = "-";
@@ -214,19 +224,38 @@ function minus() {
 
 function numberOne() {
     oneBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length <= 14) {
-            if (lastButton === "operator" || lastButton === "equals") {
-                screenText.textContent = "1";
-                lastButton = "1";
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "1";
+                    lastButton = "1";
 
-            } else if (screenText.textContent === "0") {
-                screenText.textContent = "1";
-                lastButton = "1";
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "1";
+                    lastButton = "1";
+                    
+                } else if (screenText.textContent.length < 15) {
+                    screenText.textContent = screenText.textContent + "1";
+                    lastButton = "1";
+                    
+                }
+            }
 
-            } else if (screenText.textContent.length < 14) {
-                screenText.textContent = screenText.textContent + "1";
-                lastButton = "1";
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "1";
+                    lastButton = "1";
 
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "1";
+                    lastButton = "1";
+
+                } else if (screenText.textContent.length < 14) {
+                    screenText.textContent = screenText.textContent + "1";
+                    lastButton = "1";
+
+                }
             }
         }
     })
@@ -234,7 +263,7 @@ function numberOne() {
 
 function numberTwo() {
     twoBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length < 14) {
+        if (screenText.textContent.length <= 14) {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "2";
                 lastButton = "2";
@@ -274,7 +303,7 @@ function numberThree() {
 
 function numberFour() {
     fourBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length < 14) {
+        if (screenText.textContent.length <= 14) {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "4";
                 lastButton = "4";
@@ -294,7 +323,7 @@ function numberFour() {
 
 function numberFive() {
     fiveBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length < 14) {
+        if (screenText.textContent.length <= 14) {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "5";
                 lastButton = "5";
@@ -314,7 +343,7 @@ function numberFive() {
 
 function numberSix() {
     sixBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length < 14) {
+        if (screenText.textContent.length <= 14) {
             if(lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "6";
                 lastButton = "6";
@@ -334,7 +363,7 @@ function numberSix() {
 
 function numberSeven() {
     sevenBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length < 14) {
+        if (screenText.textContent.length <= 14) {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "7";
                 lastButton = "7";
@@ -354,7 +383,7 @@ function numberSeven() {
 
 function numberEight() {
     eightBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length < 14) {
+        if (screenText.textContent.length <= 14) {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "8";
                 lastButton = "8";
@@ -374,7 +403,7 @@ function numberEight() {
 
 function numberNine() {
     nineBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length < 14) {
+        if (screenText.textContent.length <= 14) {
             if (lastButton === "operator" || lastButton === "equals") {
                 screenText.textContent = "9";
                 lastButton = "9";
@@ -392,11 +421,14 @@ function numberNine() {
     })
 }
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
     clear();
     del();
     equals();
     times();
+    divide();
     add();
     minus();
     numberOne();
