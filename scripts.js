@@ -33,13 +33,32 @@ function equalsReset() {
 
 }
 
-function roundValue(str) {
-    if (str.length <= 14) {
-        return str;
+
+
+function roundValue(num) {
+    let str = num + "";
+    if (parseFloat(str) < 0) {
+        if (str.length <= 15) {
+            return str;
+        } else {
+            let subStr = str.slice(1);
+            let strArray = subStr.split(".");
+            let precision = 13 - strArray[0].length;
+            str = (parseFloat(str)).toFixed(precision);
+            return str + "";
+            
+        } 
     } else {
-        strArray = str.split(".");
-        precision = str.length - strArray[0].length;
+        if (str.length <= 14) {
+            return str;
+        } else {
+            let strArray = str.split(".");
+            let precision = 13 - strArray[0].length;
+            str = (parseFloat(str)).toFixed(precision);
+            return str + "";
+        }
     }
+
 }
 
 function del() {
@@ -74,7 +93,10 @@ function operate() {
             equalsReset();
 
         } else {
-            screenText.textContent = (firstNum / secondNum) + "";
+            console.log("operate test");
+            console.log(firstNum);
+            console.log(secondNum);
+            screenText.textContent = roundValue(firstNum / secondNum);
             equalsReset();
 
         }
@@ -87,7 +109,7 @@ function operate() {
             screenText.textContent = MINIMUM_NUMBER + "";
             equalsReset()
         } else {
-            screenText.textContent = (firstNum * secondNum) + "";
+            screenText.textContent = roundValue(firstNum * secondNum);
             equalsReset();
         }
 
@@ -99,7 +121,7 @@ function operate() {
             screenText.textContent = MINIMUM_NUMBER + "";
             equalsReset();
         } else {
-            screenText.textContent = (firstNum + secondNum) + "";
+            screenText.textContent = roundValue(firstNum + secondNum);
             equalsReset();
         }
         
@@ -111,7 +133,7 @@ function operate() {
             screenText.textContent = MINIMUM_NUMBER + "";
             equalsReset();
         } else {
-            screenText.textContent = (firstNum - secondNum) + "";
+            screenText.textContent = roundValue(firstNum - secondNum);
             equalsReset();
         }
     
@@ -121,8 +143,18 @@ function operate() {
 function equals() {
     equalsBtn.addEventListener('click' , () => {
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
-            secondNum = parseInt(screenText.textContent);
-            operate();
+            if (screenText.textContent.split(".").length > 1) {
+                secondNum = parseFloat(screenText.textContent);
+                console.log("test float");
+                operate();
+                
+            } else {
+                secondNum = parseInt(screenText.textContent);
+                console.log("test int");
+                operate();
+                
+
+            }
         }
     })
 }
@@ -131,18 +163,38 @@ function times() {
     timesBtn.addEventListener('click' , () => {
         
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
-            secondNum = parseInt(screenText.textContent);
-            operate();
-            firstNum = parseInt(screenText.textContent);
-            operator = "x";
-            lastButton = "operator";
+            if (screenText.textContent.split(".").length > 1) {
+                secondNum = parseFloat(screenText.textContent);
+                operate();
+                if (screenText.textContent.split(".").length > 1) {
+                    firstNum = parseFloat(screenText.textContent);
+                } else {
+                    firstNum = parseInt(screenText.textContent);
+                }
+                operator = "x";
+                lastButton = "operator";
+            } else {
+                secondNum = parseInt(screenText.textContent);
+                operate();
+                if (screenText.textContent.split(".").length > 1) {
+                    firstNum = parseFloat(screenText.textContent);
+                } else {
+                    firstNum = parseInt(screenText.textContent);
+                }
+                operator = "x";
+                lastButton = "operator";
+            }
             
         } else if (firstNum !== null && operator !== "x") {
             operator = "x";
             lastButton = "operator";
 
         } else if (firstNum === null) {
-            firstNum = parseInt(screenText.textContent);
+            if (screenText.textContent.split(".").length > 1) {
+                firstNum = parseFloat(screenText.textContent);
+            } else {
+                firstNum = parseInt(screenText.textContent);
+            }
             operator = "x";
             lastButton = "operator";
         
@@ -155,18 +207,39 @@ function divide() {
     divideBtn.addEventListener('click' , () => {
         
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
-            secondNum = parseInt(screenText.textContent);
-            operate();
-            firstNum = parseInt(screenText.textContent);
-            operator = "/";
-            lastButton = "operator";
+            if (screenText.textContent.split(".").length > 1) {
+                secondNum = parseFloat(screenText.textContent);
+                operate();
+                if (screenText.textContent.split(".").length > 1) {
+                    firstNum = parseFloat(screenText.textContent);
+                } else {
+                    firstNum = parseInt(screenText.textContent);
+                }
+                operator = "/";
+                lastButton = "operator";
+                
+            } else {
+                secondNum = parseInt(screenText.textContent);
+                operate();
+                if (screenText.textContent.split(".").length > 1) {
+                    firstNum = parseFloat(screenText.textContent);
+                } else {
+                    firstNum = parseInt(screenText.textContent);
+                }
+                operator = "/";
+                lastButton = "operator";
+            }
             
-        } else if (firstNum !== null && operator !== "x") {
+        } else if (firstNum !== null && operator !== "/") {
             operator = "/";
             lastButton = "operator";
 
         } else if (firstNum === null) {
-            firstNum = parseInt(screenText.textContent);
+            if (screenText.textContent.split(".").length > 1) {
+                firstNum = parseFloat(screenText.textContent);
+            } else {
+                firstNum = parseInt(screenText.textContent);
+            }
             operator = "/";
             lastButton = "operator";
         
@@ -179,18 +252,39 @@ function add() {
     addBtn.addEventListener('click' , () => {
         
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
-            secondNum = parseInt(screenText.textContent);
-            operate();
-            firstNum = parseInt(screenText.textContent);
-            operator = "+";
-            lastButton = "operator";
+            if (screenText.textContent.split(".").length > 1) {
+                secondNum = parseFloat(screenText.textContent);
+                operate();
+                if (screenText.textContent.split(".").length > 1) {
+                    firstNum = parseFloat(screenText.textContent);
+                } else {
+                    firstNum = parseInt(screenText.textContent);
+                }
+                operator = "+";
+                lastButton = "operator";
+            } else {
+                secondNum = parseInt(screenText.textContent);
+                operate();
+                if (screenText.textContent.split(".").length > 1) {
+                    firstNum = parseFloat(screenText.textContent);
+                } else {
+                    firstNum = parseInt(screenText.textContent);
+                }
+                operator = "+";
+                lastButton = "operator";
+            }
+            
             
         } else if(firstNum !== null && operator !== "+") {
             operator = "+";
             lastButton = "operator";
 
         } else if (firstNum === null) {
-            firstNum = parseInt(screenText.textContent);
+            if (screenText.textContent.split(".").length > 1) {
+                firstNum = parseFloat(screenText.textContent);
+            } else {
+                firstNum = parseInt(screenText.textContent);
+            }
             operator = "+";
             lastButton = "operator";
         
@@ -203,18 +297,38 @@ function minus() {
     minusBtn.addEventListener('click' , () => {
         
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
-            secondNum = parseInt(screenText.textContent);
-            operate();
-            firstNum = parseInt(screenText.textContent);
-            operator = "-";
-            lastButton = "operator";
-            console.log("yo");
+            if (screenText.textContent.split(".").length > 1) {
+                secondNum = parseFloat(screenText.textContent);
+                operate();
+                if (screenText.textContent.split(".").length > 1) {
+                    firstNum = parseFloat(screenText.textContent);
+                } else {
+                    firstNum = parseInt(screenText.textContent);
+                }
+                operator = "-";
+                lastButton = "operator";
+            } else {
+                secondNum = parseInt(screenText.textContent);
+                operate();
+                if (screenText.textContent.split(".").length > 1) {
+                    firstNum = parseFloat(screenText.textContent);
+                } else {
+                    firstNum = parseInt(screenText.textContent);
+                }
+                operator = "-";
+                lastButton = "operator";
+            }
             
         } else if (firstNum !== null && operator !== "-") {
             operator = "-";
             lastButton = "operator";
+
         } else if (firstNum === null) {
-            firstNum = parseInt(screenText.textContent);
+            if (screenText.textContent.split(".").length > 1) {
+                firstNum = parseFloat(screenText.textContent);
+            } else {
+                firstNum = parseInt(screenText.textContent);
+            }
             operator = "-";
             lastButton = "operator";
         
@@ -381,19 +495,38 @@ function numberFour() {
 
 function numberFive() {
     fiveBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length <= 14) {
-            if (lastButton === "operator" || lastButton === "equals") {
-                screenText.textContent = "5";
-                lastButton = "5";
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "5";
+                    lastButton = "5";
 
-            } else if (screenText.textContent === "0") {
-                screenText.textContent = "5";
-                lastButton = "5";
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "5";
+                    lastButton = "5";
+                    
+                } else if (screenText.textContent.length < 15) {
+                    screenText.textContent = screenText.textContent + "5";
+                    lastButton = "5";
+                    
+                }
+            }
 
-            } else if (screenText.textContent.length < 14) {
-                screenText.textContent = screenText.textContent + "5";
-                lastButton = "5";
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "5";
+                    lastButton = "5";
 
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "5";
+                    lastButton = "5";
+
+                } else if (screenText.textContent.length < 14) {
+                    screenText.textContent = screenText.textContent + "5";
+                    lastButton = "5";
+
+                }
             }
         }
     })
@@ -401,19 +534,38 @@ function numberFive() {
 
 function numberSix() {
     sixBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length <= 14) {
-            if(lastButton === "operator" || lastButton === "equals") {
-                screenText.textContent = "6";
-                lastButton = "6";
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "6";
+                    lastButton = "6";
 
-            } else if (screenText.textContent === "0") {
-                screenText.textContent = "6";
-                lastButton = "6";
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "6";
+                    lastButton = "6";
+                    
+                } else if (screenText.textContent.length < 15) {
+                    screenText.textContent = screenText.textContent + "6";
+                    lastButton = "6";
+                    
+                }
+            }
 
-            } else if (screenText.textContent.length < 14) {
-                screenText.textContent = screenText.textContent + "6";
-                lastButton = "6";
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "6";
+                    lastButton = "6";
 
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "6";
+                    lastButton = "6";
+
+                } else if (screenText.textContent.length < 14) {
+                    screenText.textContent = screenText.textContent + "6";
+                    lastButton = "6";
+
+                }
             }
         }
     })
@@ -421,19 +573,38 @@ function numberSix() {
 
 function numberSeven() {
     sevenBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length <= 14) {
-            if (lastButton === "operator" || lastButton === "equals") {
-                screenText.textContent = "7";
-                lastButton = "7";
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "7";
+                    lastButton = "7";
 
-            } else if (screenText.textContent === "0") {
-                screenText.textContent = "7";
-                lastButton = "7";
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "7";
+                    lastButton = "7";
+                    
+                } else if (screenText.textContent.length < 15) {
+                    screenText.textContent = screenText.textContent + "7";
+                    lastButton = "7";
+                    
+                }
+            }
 
-            } else if (screenText.textContent.length < 14) {
-                screenText.textContent = screenText.textContent + "7";
-                lastButton = "7";
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "7";
+                    lastButton = "7";
 
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "7";
+                    lastButton = "7";
+
+                } else if (screenText.textContent.length < 14) {
+                    screenText.textContent = screenText.textContent + "7";
+                    lastButton = "7";
+
+                }
             }
         }
     })
@@ -441,19 +612,38 @@ function numberSeven() {
 
 function numberEight() {
     eightBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length <= 14) {
-            if (lastButton === "operator" || lastButton === "equals") {
-                screenText.textContent = "8";
-                lastButton = "8";
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "8";
+                    lastButton = "8";
 
-            } else if (screenText.textContent === "0") {
-                screenText.textContent = "8";
-                lastButton = "8";
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "8";
+                    lastButton = "8";
+                    
+                } else if (screenText.textContent.length < 15) {
+                    screenText.textContent = screenText.textContent + "8";
+                    lastButton = "8";
+                    
+                }
+            }
 
-            } else if (screenText.textContent.length < 14) {
-                screenText.textContent = screenText.textContent + "8";
-                lastButton = "8";
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "8";
+                    lastButton = "8";
 
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "8";
+                    lastButton = "8";
+
+                } else if (screenText.textContent.length < 14) {
+                    screenText.textContent = screenText.textContent + "8";
+                    lastButton = "8";
+
+                }
             }
         }
     })
@@ -461,19 +651,38 @@ function numberEight() {
 
 function numberNine() {
     nineBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length <= 14) {
-            if (lastButton === "operator" || lastButton === "equals") {
-                screenText.textContent = "9";
-                lastButton = "9";
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "9";
+                    lastButton = "9";
 
-            } else if (screenText.textContent === "0") {
-                screenText.textContent = "9";
-                lastButton = "9";
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "9";
+                    lastButton = "9";
+                    
+                } else if (screenText.textContent.length < 15) {
+                    screenText.textContent = screenText.textContent + "9";
+                    lastButton = "9";
+                    
+                }
+            }
 
-            } else if (screenText.textContent.length < 14) {
-                screenText.textContent = screenText.textContent + "9";
-                lastButton = "9";
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "9";
+                    lastButton = "9";
 
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "9";
+                    lastButton = "9";
+
+                } else if (screenText.textContent.length < 14) {
+                    screenText.textContent = screenText.textContent + "9";
+                    lastButton = "9";
+
+                }
             }
         }
     })
