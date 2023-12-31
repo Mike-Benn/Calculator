@@ -303,19 +303,38 @@ function numberTwo() {
 
 function numberThree() {
     threeBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length <= 14) {
-            if (lastButton === "operator" || lastButton === "equals") {
-                screenText.textContent = "3";
-                lastButton = "3";
-                
-            } else if (screenText.textContent === "0") {
-                screenText.textContent = "3";
-                lastButton = "3";
-                
-            } else if (screenText.textContent.length < 14) {
-                screenText.textContent = screenText.textContent + "3";
-                lastButton = "3";
-                
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "3";
+                    lastButton = "3";
+
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "3";
+                    lastButton = "3";
+                    
+                } else if (screenText.textContent.length < 15) {
+                    screenText.textContent = screenText.textContent + "3";
+                    lastButton = "3";
+                    
+                }
+            }
+
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "3";
+                    lastButton = "3";
+
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "3";
+                    lastButton = "3";
+
+                } else if (screenText.textContent.length < 14) {
+                    screenText.textContent = screenText.textContent + "3";
+                    lastButton = "3";
+
+                }
             }
         }
     })
@@ -323,19 +342,38 @@ function numberThree() {
 
 function numberFour() {
     fourBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length <= 14) {
-            if (lastButton === "operator" || lastButton === "equals") {
-                screenText.textContent = "4";
-                lastButton = "4";
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "4";
+                    lastButton = "4";
 
-            } else if (screenText.textContent === "0") {
-                screenText.textContent = "4";
-                lastButton = "4";
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "4";
+                    lastButton = "4";
+                    
+                } else if (screenText.textContent.length < 15) {
+                    screenText.textContent = screenText.textContent + "4";
+                    lastButton = "4";
+                    
+                }
+            }
 
-            } else if (screenText.textContent.length < 14) {
-                screenText.textContent = screenText.textContent + "4";
-                lastButton = "4"
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "4";
+                    lastButton = "4";
 
+                } else if (screenText.textContent === "0") {
+                    screenText.textContent = "4";
+                    lastButton = "4";
+
+                } else if (screenText.textContent.length < 14) {
+                    screenText.textContent = screenText.textContent + "4";
+                    lastButton = "4";
+
+                }
             }
         }
     })
