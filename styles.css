@@ -1,13 +1,37 @@
-.page-container {
+.page-container , .calculator-body , .screen , .delete-container , .core-button-container {
     display: flex;
-    justify-content: center;
+
+}
+
+.core-btn , .page-container , .clear-btn , .delete-btn {
     width: 100%;
+
+}
+
+.clear-btn , .delete-btn , .core-btn , .screen {
+    border-radius: 5px;
+    border: solid black 2px;
+
+}
+
+.core-button-container , .delete-container {
+    height: 60px;
+
+}
+
+.clear-btn , .delete-btn {
+    font-size: 20px;
+
+}
+
+.page-container {
+    justify-content: center;
     height: 100%;
+
 }
 
 .calculator-body{
     margin-top: 50px;
-    display: flex;
     width: 405px;
     height: 475px;
     background-color: gray;
@@ -16,37 +40,39 @@
     padding: 16px;
     flex-direction: column;
     gap: 15px;
+
 }
 
 .screen {
-    display: flex;
     height: 80px;
     background-color: rgb(241, 242, 234);
-    border: solid black 2px;
-    border-radius: 5px;
     flex-direction: column-reverse;
     align-items: flex-end;
     padding: 10px;
 
 }
 
+.screen-text , .operation-text {
+    font-family: 'Roboto Mono' , monospace;
+
+}
+
 .screen-text {
     font-size: 40px;
-    font-family: 'Roboto Mono', monospace;
     font-weight: bold;
     height: 50px;
+
 }
 
 .operation-text {
-    font-family: 'Roboto Mono', monospace;
     font-size: 15px;
     margin-bottom: 5px;
+
 }
 
 .delete-container {
-    display: flex;
-    height: 60px;
     gap: 20px;
+
 }
 
 button {
@@ -56,6 +82,7 @@ button {
 
 button:hover {
     filter: brightness(75%);
+
 }
 
 button:active {
@@ -63,33 +90,23 @@ button:active {
 
 }
 
-.clear-btn , .delete-btn {
-    width: 100%;
-    border-radius: 5px;
-    border: solid black 2px;
-
-}
-
 .clear-btn {
     background-color: red;
-    font-size: 20px;
+
 }
 
 .delete-btn {
     background-color: blueviolet;
-    font-size: 20px;
+
 }
 
 .core-button-container {
-    display: flex;
-    height: 60px;
     gap: 10px;
+
 }
 
 .core-btn {
-    width: 100%;
-    border: solid black 2px;
     font-size: 18px;
-    border-radius: 5px;
     background-color: #d3d3d3;
+    
 }
