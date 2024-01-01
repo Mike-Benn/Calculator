@@ -40,6 +40,9 @@ function isDecimalActive() {
 function equalsReset() {
     lastButton = "equals";
     operationText.textContent = operationText.textContent + secondNum + " =";
+    if (screenText.textContent.includes("e-")) {
+        screenText.textContent = "0";
+    } 
     firstNum = null;
     secondNum = null;
     operator = null;
@@ -113,11 +116,9 @@ function operate() {
             equalsReset();
 
         } else {
-            console.log("operate test");
-            console.log(firstNum);
-            console.log(secondNum);
             screenText.textContent = roundValue(firstNum / secondNum);
             equalsReset();
+            console.log(screenText.textContent);
 
         }
 
@@ -165,12 +166,10 @@ function equals() {
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
             if (screenText.textContent.split(".").length > 1) {
                 secondNum = parseFloat(screenText.textContent);
-                console.log("test float");
                 operate();
                 
             } else {
                 secondNum = parseInt(screenText.textContent);
-                console.log("test int");
                 operate();
                 
 
@@ -231,7 +230,6 @@ function times() {
 
 function divide() {
     divideBtn.addEventListener('click' , () => {
-        
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
             if (screenText.textContent.split(".").length > 1) {
                 secondNum = parseFloat(screenText.textContent);
