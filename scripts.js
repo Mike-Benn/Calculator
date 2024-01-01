@@ -26,19 +26,23 @@ const divideBtn = document.querySelector('#divide-btn');
 const addBtn = document.querySelector('#add-btn');
 const minusBtn = document.querySelector('#minus-btn');
 
-function checkDecimal() {
+
+function isDecimalActive() {
     if (screenText.textContent.split(".").length > 1) {
         decimalActive = true;
     } else {
         decimalActive = false;
-    } 
+    }
 }
+
 
 function equalsReset() {
     lastButton = "equals";
     firstNum = null;
     secondNum = null;
     operator = null;
+    decimalActive = false;
+
 
 }
 
@@ -74,6 +78,9 @@ function del() {
     deleteBtn.addEventListener('click' , () => {
         if (screenText.textContent.length == 1) {
             screenText.textContent = "0";
+        } else if (screenText.textContent.slice(screenText.textContent.length - 1 , screenText.textContent.length) === ".") {
+            decimalActive = false;
+            screenText.textContent = screenText.textContent.slice(0 , screenText.textContent.length - 1);
         } else {
             screenText.textContent = screenText.textContent.slice(0 , screenText.textContent.length - 1);
         }
@@ -88,6 +95,7 @@ function clear() {
         firstNum = null;
         secondNum = null;
         lastButton = null;
+        decimalActive = false;
     })
 }
 
@@ -197,6 +205,7 @@ function times() {
         } else if (firstNum !== null && operator !== "x") {
             operator = "x";
             lastButton = "operator";
+            decimalActive = false;
 
         } else if (firstNum === null) {
             if (screenText.textContent.split(".").length > 1) {
@@ -206,6 +215,7 @@ function times() {
             }
             operator = "x";
             lastButton = "operator";
+            decimalActive = false;
         
         }
             
@@ -242,6 +252,7 @@ function divide() {
         } else if (firstNum !== null && operator !== "/") {
             operator = "/";
             lastButton = "operator";
+            decimalActive = false;
 
         } else if (firstNum === null) {
             if (screenText.textContent.split(".").length > 1) {
@@ -251,6 +262,7 @@ function divide() {
             }
             operator = "/";
             lastButton = "operator";
+            decimalActive = false;
         
         }
             
@@ -287,6 +299,7 @@ function add() {
         } else if(firstNum !== null && operator !== "+") {
             operator = "+";
             lastButton = "operator";
+            decimalActive = false;
 
         } else if (firstNum === null) {
             if (screenText.textContent.split(".").length > 1) {
@@ -296,6 +309,7 @@ function add() {
             }
             operator = "+";
             lastButton = "operator";
+            decimalActive = false;
         
         }
             
@@ -331,6 +345,7 @@ function minus() {
         } else if (firstNum !== null && operator !== "-") {
             operator = "-";
             lastButton = "operator";
+            decimalActive = false;
 
         } else if (firstNum === null) {
             if (screenText.textContent.split(".").length > 1) {
@@ -340,10 +355,46 @@ function minus() {
             }
             operator = "-";
             lastButton = "operator";
+            decimalActive = false;
         
         }
             
     })
+}
+
+function decimalHelper() {
+    if (decimalActive == false) {
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    decimalActive = true;
+                    screenText.textContent = "0.";
+                    lastButton = "decimal";
+
+                } else if (screenText.textContent.length < 14) {
+                    decimalActive = true;
+                    screenText.textContent = screenText.textContent + ".";
+                    lastButton = "decimal";
+                }
+            }
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    decimalActive = true;
+                    screenText.textContent = "0.";
+                    lastButton = "decimal";
+                } else if (screenText.textContent.length < 14) {
+                    decimalActive = true;
+                    screenText.textContent = screenText.textContent + ".";
+                    lastButton = "decimal";
+                }
+            }
+        }
+    }
+}
+
+function decimal() {
+    decimalBtn.addEventListener('click' , decimalHelper);
 }
 
 
@@ -709,6 +760,7 @@ document.addEventListener("DOMContentLoaded", () => {
     divide();
     add();
     minus();
+    decimal();
     numberOne();
     numberTwo();
     numberThree();
