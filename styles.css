@@ -34,12 +34,27 @@
     font-size: 40px;
     font-family: 'Roboto Mono', monospace;
     font-weight: bold;
+    height: 50px;
 }
 
 .delete-container {
     display: flex;
     height: 60px;
     gap: 20px;
+}
+
+button {
+    transition: all 0.2s ease-in-out;
+    
+}
+
+button:hover {
+    filter: brightness(75%);
+}
+
+button:active {
+    filter: brightness(50%);
+
 }
 
 .clear-btn , .delete-btn {
