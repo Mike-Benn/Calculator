@@ -397,11 +397,42 @@ function decimal() {
     decimalBtn.addEventListener('click' , decimalHelper);
 }
 
-
+function numberZero() {
+    zeroBtn.addEventListener('click' , () => {
+        if (parseFloat(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "0";
+                    lastButton = "0";
+                } else if (screenText.textContent === "0") {
+                    lastButton = "0";
+                
+                } else if (screenText.textContent.length < 15) {
+                    screenText.textContent = screenText.textContent + "0";
+                    lastButton = "0";
+        
+                }
+            }
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals") {
+                    screenText.textContent = "0";
+                    lastButton = "0";
+                } else if (screenText.textContent === "0") {
+                    lastButton ="0";
+                } else if (screenText.textContent.length < 14) {
+                    screenText.textContent = screenText.textContent + "0";
+                    lastButton = "0";
+                    
+                }
+            }
+        }
+    })
+}
 
 function numberOne() {
     oneBtn.addEventListener('click' , () => {
-        if (parseInt(screenText.textContent) < 0) {
+        if (parseFloat(screenText.textContent) < 0) {
             if (screenText.textContent.length <= 15) {
                 if (lastButton === "operator" || lastButton === "equals") {
                     screenText.textContent = "1";
@@ -440,7 +471,7 @@ function numberOne() {
 
 function numberTwo() {
     twoBtn.addEventListener('click' , () => {
-        if (parseInt(screenText.textContent) < 0) {
+        if (parseFloat(screenText.textContent) < 0) {
             if (screenText.textContent.length <= 15) {
                 if (lastButton === "operator" || lastButton === "equals") {
                     screenText.textContent = "2";
@@ -476,10 +507,13 @@ function numberTwo() {
         }
     })
 }
+
+
+
 
 function numberThree() {
     threeBtn.addEventListener('click' , () => {
-        if (parseInt(screenText.textContent) < 0) {
+        if (parseFloat(screenText.textContent) < 0) {
             if (screenText.textContent.length <= 15) {
                 if (lastButton === "operator" || lastButton === "equals") {
                     screenText.textContent = "3";
@@ -515,10 +549,11 @@ function numberThree() {
         }
     })
 }
+
 
 function numberFour() {
     fourBtn.addEventListener('click' , () => {
-        if (parseInt(screenText.textContent) < 0) {
+        if (parseFloat(screenText.textContent) < 0) {
             if (screenText.textContent.length <= 15) {
                 if (lastButton === "operator" || lastButton === "equals") {
                     screenText.textContent = "4";
@@ -554,10 +589,11 @@ function numberFour() {
         }
     })
 }
+
 
 function numberFive() {
     fiveBtn.addEventListener('click' , () => {
-        if (parseInt(screenText.textContent) < 0) {
+        if (parseFloat(screenText.textContent) < 0) {
             if (screenText.textContent.length <= 15) {
                 if (lastButton === "operator" || lastButton === "equals") {
                     screenText.textContent = "5";
@@ -593,10 +629,11 @@ function numberFive() {
         }
     })
 }
+
 
 function numberSix() {
     sixBtn.addEventListener('click' , () => {
-        if (parseInt(screenText.textContent) < 0) {
+        if (parseFloat(screenText.textContent) < 0) {
             if (screenText.textContent.length <= 15) {
                 if (lastButton === "operator" || lastButton === "equals") {
                     screenText.textContent = "6";
@@ -633,9 +670,11 @@ function numberSix() {
     })
 }
 
+
+
 function numberSeven() {
     sevenBtn.addEventListener('click' , () => {
-        if (parseInt(screenText.textContent) < 0) {
+        if (parseFloat(screenText.textContent) < 0) {
             if (screenText.textContent.length <= 15) {
                 if (lastButton === "operator" || lastButton === "equals") {
                     screenText.textContent = "7";
@@ -674,7 +713,7 @@ function numberSeven() {
 
 function numberEight() {
     eightBtn.addEventListener('click' , () => {
-        if (parseInt(screenText.textContent) < 0) {
+        if (parseFloat(screenText.textContent) < 0) {
             if (screenText.textContent.length <= 15) {
                 if (lastButton === "operator" || lastButton === "equals") {
                     screenText.textContent = "8";
@@ -713,7 +752,7 @@ function numberEight() {
 
 function numberNine() {
     nineBtn.addEventListener('click' , () => {
-        if (parseInt(screenText.textContent) < 0) {
+        if (parseFloat(screenText.textContent) < 0) {
             if (screenText.textContent.length <= 15) {
                 if (lastButton === "operator" || lastButton === "equals") {
                     screenText.textContent = "9";
@@ -751,7 +790,6 @@ function numberNine() {
 }
 
 
-
 document.addEventListener("DOMContentLoaded", () => {
     clear();
     del();
@@ -761,6 +799,7 @@ document.addEventListener("DOMContentLoaded", () => {
     add();
     minus();
     decimal();
+    numberZero();
     numberOne();
     numberTwo();
     numberThree();
