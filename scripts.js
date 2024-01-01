@@ -7,6 +7,7 @@ let decimalActive = false;
 const MAXIMUM_NUMBER = 99999999999999;
 const MINIMUM_NUMBER = -99999999999999;
 const screenText = document.querySelector('.screen-text');
+const operationText = document.querySelector('.operation-text');
 const deleteBtn = document.querySelector('#delete-btn');
 const clearBtn = document.querySelector('#clear-btn');
 const equalsBtn = document.querySelector('#equals-btn');
@@ -38,6 +39,7 @@ function isDecimalActive() {
 
 function equalsReset() {
     lastButton = "equals";
+    operationText.textContent = operationText.textContent + secondNum + " =";
     firstNum = null;
     secondNum = null;
     operator = null;
@@ -91,6 +93,7 @@ function del() {
 function clear() {
     clearBtn.addEventListener('click' , () => {
         screenText.textContent = "0";
+        operationText.textContent = "";
         operator = null;
         firstNum = null;
         secondNum = null;
@@ -188,6 +191,7 @@ function times() {
                 } else {
                     firstNum = parseInt(screenText.textContent);
                 }
+                operationText.textContent = "" + firstNum + " × ";
                 operator = "x";
                 lastButton = "operator";
             } else {
@@ -198,6 +202,7 @@ function times() {
                 } else {
                     firstNum = parseInt(screenText.textContent);
                 }
+                operationText.textContent = "" + firstNum + " × ";
                 operator = "x";
                 lastButton = "operator";
             }
@@ -206,6 +211,7 @@ function times() {
             operator = "x";
             lastButton = "operator";
             decimalActive = false;
+            operationText.textContent = "" + firstNum + " × ";
 
         } else if (firstNum === null) {
             if (screenText.textContent.split(".").length > 1) {
@@ -216,6 +222,7 @@ function times() {
             operator = "x";
             lastButton = "operator";
             decimalActive = false;
+            operationText.textContent = "" + firstNum + " × ";
         
         }
             
@@ -234,6 +241,7 @@ function divide() {
                 } else {
                     firstNum = parseInt(screenText.textContent);
                 }
+                operationText.textContent = "" + firstNum + " ÷ ";
                 operator = "/";
                 lastButton = "operator";
                 
@@ -245,6 +253,7 @@ function divide() {
                 } else {
                     firstNum = parseInt(screenText.textContent);
                 }
+                operationText.textContent = "" + firstNum + " ÷ ";
                 operator = "/";
                 lastButton = "operator";
             }
@@ -253,6 +262,7 @@ function divide() {
             operator = "/";
             lastButton = "operator";
             decimalActive = false;
+            operationText.textContent = "" + firstNum + " ÷ ";
 
         } else if (firstNum === null) {
             if (screenText.textContent.split(".").length > 1) {
@@ -260,6 +270,7 @@ function divide() {
             } else {
                 firstNum = parseInt(screenText.textContent);
             }
+            operationText.textContent = "" + firstNum + " ÷ ";
             operator = "/";
             lastButton = "operator";
             decimalActive = false;
@@ -281,6 +292,7 @@ function add() {
                 } else {
                     firstNum = parseInt(screenText.textContent);
                 }
+                operationText.textContent = "" + firstNum + " + ";
                 operator = "+";
                 lastButton = "operator";
             } else {
@@ -291,6 +303,7 @@ function add() {
                 } else {
                     firstNum = parseInt(screenText.textContent);
                 }
+                operationText.textContent = "" + firstNum + " + ";
                 operator = "+";
                 lastButton = "operator";
             }
@@ -300,6 +313,7 @@ function add() {
             operator = "+";
             lastButton = "operator";
             decimalActive = false;
+            operationText.textContent = "" + firstNum + " + ";
 
         } else if (firstNum === null) {
             if (screenText.textContent.split(".").length > 1) {
@@ -307,6 +321,7 @@ function add() {
             } else {
                 firstNum = parseInt(screenText.textContent);
             }
+            operationText.textContent = "" + firstNum + " + ";
             operator = "+";
             lastButton = "operator";
             decimalActive = false;
@@ -328,6 +343,7 @@ function minus() {
                 } else {
                     firstNum = parseInt(screenText.textContent);
                 }
+                operationText.textContent = "" + firstNum + " - ";
                 operator = "-";
                 lastButton = "operator";
             } else {
@@ -338,6 +354,7 @@ function minus() {
                 } else {
                     firstNum = parseInt(screenText.textContent);
                 }
+                operationText.textContent = "" + firstNum + " - ";
                 operator = "-";
                 lastButton = "operator";
             }
@@ -346,6 +363,7 @@ function minus() {
             operator = "-";
             lastButton = "operator";
             decimalActive = false;
+            operationText.textContent = "" + firstNum + " - ";
 
         } else if (firstNum === null) {
             if (screenText.textContent.split(".").length > 1) {
@@ -353,6 +371,7 @@ function minus() {
             } else {
                 firstNum = parseInt(screenText.textContent);
             }
+            operationText.textContent = "" + firstNum + " - ";
             operator = "-";
             lastButton = "operator";
             decimalActive = false;
@@ -423,7 +442,7 @@ function numberZero() {
                 } else if (screenText.textContent.length < 14) {
                     screenText.textContent = screenText.textContent + "0";
                     lastButton = "0";
-                    
+
                 }
             }
         }
