@@ -3,7 +3,7 @@
 
 }
 
-.core-btn , .page-container , .clear-btn , .delete-btn {
+.core-btn , .page-container {
     width: 100%;
 
 }
@@ -21,6 +21,7 @@
 
 .clear-btn , .delete-btn {
     font-size: 20px;
+    flex: 1;
 
 }
 
@@ -98,6 +99,10 @@ button:active {
 .delete-btn {
     background-color: blueviolet;
 
+}
+
+#negative-btn {
+    width: 93.75px;
 }
 
 .core-button-container {
