@@ -187,6 +187,56 @@ function operate() {
     }
 }
 
+// Helper for the four arithmetic button event listeners below when one of the operator buttons is clicked
+// Is called when the firstNum has been assigned a non-null value, an operator has been assigned, and the last button pressed wasn't an operator 
+// Sets secondNum to current screenText textContent value and then calls operate() 
+// Return value is assigned to firstNum and operator is set to the operator associated with the button that was clicked
+// Finishes by updating all status variables to their appropriate values based on the button that was clicked
+
+function consecutiveOperator(str) {
+    secondNum = parseFloat(screenText.textContent);
+    operate();
+    firstNum = parseFloat(screenText.textContent);
+    lastButton = "operator";
+    operator = str;
+    updateScreenText(str);
+
+}
+
+function changeOperator(str) {
+    operator = str;
+    lastButton = "operator";
+    decimalActive = false;
+    updateScreenText(str);
+
+}
+
+function setOperator(str) {
+    firstNum = parseFloat(screenText.textContent);
+    operator = str;
+    lastButton = "operator";
+    decimalActive = false;
+    updateScreenText(str);
+
+}
+
+function updateScreenText(str) {
+    console.log(str);
+    if (str === "x") {
+        operationText.textContent = "" + firstNum + " × ";
+
+    } else if (str === "/") {
+        operationText.textContent = "" + firstNum + " ÷ ";
+
+    } else if (str === "+") {
+        operationText.textContent = "" + firstNum + " + ";
+
+    } else if (str === "-") {
+        operationText.textContent = "" + firstNum + " - ";
+
+    }    
+}
+
 // ###########################################################
 //                 Non-numerical Buttons             
 // ###########################################################
@@ -238,6 +288,8 @@ function equals() {
         }
     })
 }
+
+
 
 // Helper function that is called in main decimal function when the decimal point button is clicked
 // Appends decimal point to end of screenText textContent value if there isn't a decimal point already active on the current value
@@ -293,286 +345,67 @@ function decimalHelper() {
 
 // If neither is true and firstNum is null then firstNum is assigned the current screenText textContent value and current operator is set to operator button clicked
 
-
-
 // Multiplication
 
-
-
-function times() {
-    timesBtn.addEventListener('click' , () => {
-        
-        if (operator !== null && firstNum !== null && lastButton !== "operator") {
-            if (screenText.textContent.split(".").length > 1) {
-                secondNum = parseFloat(screenText.textContent);
-                operate();
-
-                if (screenText.textContent.split(".").length > 1) {
-                    firstNum = parseFloat(screenText.textContent);
-
-                } else {
-                    firstNum = parseInt(screenText.textContent);
-
-                }
-                operationText.textContent = "" + firstNum + " × ";
-                operator = "x";
-                lastButton = "operator";
-
-            } else {
-                secondNum = parseInt(screenText.textContent);
-                operate();
-
-                if (screenText.textContent.split(".").length > 1) {
-                    firstNum = parseFloat(screenText.textContent);
-
-                } else {
-                    firstNum = parseInt(screenText.textContent);
-
-                }
-                operationText.textContent = "" + firstNum + " × ";
-                operator = "x";
-                lastButton = "operator";
-
-            }
-            
-        } else if (firstNum !== null && operator !== "x") {
-            operator = "x";
-            lastButton = "operator";
-            decimalActive = false;
-            operationText.textContent = "" + firstNum + " × ";
-
-        } else if (firstNum === null) {
-            if (screenText.textContent.split(".").length > 1) {
-                firstNum = parseFloat(screenText.textContent);
-
-            } else {
-                firstNum = parseInt(screenText.textContent);
-
-            }
-            operator = "x";
-            lastButton = "operator";
-            decimalActive = false;
-            operationText.textContent = "" + firstNum + " × ";
-        
-        }
-            
-    })
-}
-/*
 function times() {
     timesBtn.addEventListener('click' , () => {
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
-            secondNum = parseFloat(screenText.textContent);
-            operate();
-            firstNum = parseFloat(screenText.textContent);
-            operationText.textContent = "" + firstNum + " × ";
-            operator = "x";
-            lastButton = "operator";
-
+            consecutiveOperator("x");
+            
         } else if (firstNum !== null && operator !== "x") {
-            operator = "x";
-            lastButton = "operator";
-            decimalActive = false;
-            operationText.textContent = "" + firstNum + " × ";
-
+            changeOperator("x");
+            
         } else if (firstNum === null) {
-            firstNum = parseFloat(screenText.textContent);
-            operator = "x";
-            lastButton = "operator";
-            decimalActive = false;
-            operationText.textContent = "" + firstNum + " × ";
-
+            setOperator("x");
+            
         }
     })
 }
-*/
-// Division
 
 function divide() {
     divideBtn.addEventListener('click' , () => {
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
-            if (screenText.textContent.split(".").length > 1) {
-                secondNum = parseFloat(screenText.textContent);
-                operate();
-
-                if (screenText.textContent.split(".").length > 1) {
-                    firstNum = parseFloat(screenText.textContent);
-
-                } else {
-                    firstNum = parseInt(screenText.textContent);
-
-                }
-                operationText.textContent = "" + firstNum + " ÷ ";
-                operator = "/";
-                lastButton = "operator";
-                
-            } else {
-                secondNum = parseInt(screenText.textContent);
-                operate();
-
-                if (screenText.textContent.split(".").length > 1) {
-                    firstNum = parseFloat(screenText.textContent);
-
-                } else {
-                    firstNum = parseInt(screenText.textContent);
-
-                }
-                operationText.textContent = "" + firstNum + " ÷ ";
-                operator = "/";
-                lastButton = "operator";
-
-            }
+            consecutiveOperator("/");
             
         } else if (firstNum !== null && operator !== "/") {
-            operator = "/";
-            lastButton = "operator";
-            decimalActive = false;
-            operationText.textContent = "" + firstNum + " ÷ ";
+            changeOperator("/");
 
         } else if (firstNum === null) {
-            if (screenText.textContent.split(".").length > 1) {
-                firstNum = parseFloat(screenText.textContent);
+            setOperator("/");
 
-            } else {
-                firstNum = parseInt(screenText.textContent);
-
-            }
-            operationText.textContent = "" + firstNum + " ÷ ";
-            operator = "/";
-            lastButton = "operator";
-            decimalActive = false;
-        
         }
-            
     })
 }
-
-// Addition
 
 function add() {
     addBtn.addEventListener('click' , () => {
-        
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
-            if (screenText.textContent.split(".").length > 1) {
-                secondNum = parseFloat(screenText.textContent);
-                operate();
-
-                if (screenText.textContent.split(".").length > 1) {
-                    firstNum = parseFloat(screenText.textContent);
-
-                } else {
-                    firstNum = parseInt(screenText.textContent);
-
-                }
-                operationText.textContent = "" + firstNum + " + ";
-                operator = "+";
-                lastButton = "operator";
-
-            } else {
-                secondNum = parseInt(screenText.textContent);
-                operate();
-
-                if (screenText.textContent.split(".").length > 1) {
-                    firstNum = parseFloat(screenText.textContent);
-
-                } else {
-                    firstNum = parseInt(screenText.textContent);
-
-                }
-                operationText.textContent = "" + firstNum + " + ";
-                operator = "+";
-                lastButton = "operator";
-
-            }
+            consecutiveOperator("+");
             
-            
-        } else if(firstNum !== null && operator !== "+") {
-            operator = "+";
-            lastButton = "operator";
-            decimalActive = false;
-            operationText.textContent = "" + firstNum + " + ";
+        } else if (firstNum !== null && operator !== "+") {
+            changeOperator("+");
 
         } else if (firstNum === null) {
-            if (screenText.textContent.split(".").length > 1) {
-                firstNum = parseFloat(screenText.textContent);
+            setOperator("+");
 
-            } else {
-                firstNum = parseInt(screenText.textContent);
-
-            }
-            operationText.textContent = "" + firstNum + " + ";
-            operator = "+";
-            lastButton = "operator";
-            decimalActive = false;
-        
         }
-            
     })
 }
-
-// Subtraction
 
 function minus() {
     minusBtn.addEventListener('click' , () => {
-        
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
-            if (screenText.textContent.split(".").length > 1) {
-                secondNum = parseFloat(screenText.textContent);
-                operate();
-
-                if (screenText.textContent.split(".").length > 1) {
-                    firstNum = parseFloat(screenText.textContent);
-
-                } else {
-                    firstNum = parseInt(screenText.textContent);
-
-                }
-                operationText.textContent = "" + firstNum + " - ";
-                operator = "-";
-                lastButton = "operator";
-
-            } else {
-                secondNum = parseInt(screenText.textContent);
-                operate();
-
-                if (screenText.textContent.split(".").length > 1) {
-                    firstNum = parseFloat(screenText.textContent);
-
-                } else {
-                    firstNum = parseInt(screenText.textContent);
-
-                }
-                operationText.textContent = "" + firstNum + " - ";
-                operator = "-";
-                lastButton = "operator";
-
-            }
+            consecutiveOperator("-");
             
         } else if (firstNum !== null && operator !== "-") {
-            operator = "-";
-            lastButton = "operator";
-            decimalActive = false;
-            operationText.textContent = "" + firstNum + " - ";
+            changeOperator("-");
 
         } else if (firstNum === null) {
-            if (screenText.textContent.split(".").length > 1) {
-                firstNum = parseFloat(screenText.textContent);
+            setOperator("-");
 
-            } else {
-                firstNum = parseInt(screenText.textContent);
-
-            }
-            operationText.textContent = "" + firstNum + " - ";
-            operator = "-";
-            lastButton = "operator";
-            decimalActive = false;
-        
         }
-            
     })
 }
-
-
 
 // ###########################################################
 //                      Numeric Buttons             
