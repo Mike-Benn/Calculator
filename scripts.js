@@ -173,17 +173,9 @@ function decimal() {
 
 function del() {
     deleteBtn.addEventListener('click' , () => {
-        if (screenText.textContent.length == 1) {
-            screenText.textContent = "0";
-
-        } else if (screenText.textContent.slice(screenText.textContent.length - 1 , screenText.textContent.length) === ".") {
-            decimalActive = false;
-            screenText.textContent = screenText.textContent.slice(0 , screenText.textContent.length - 1);
-
-        } else {
-            screenText.textContent = screenText.textContent.slice(0 , screenText.textContent.length - 1);
-
-        }
+        screenText.textContent = "0";
+        decimalActive = "false";
+        
     })
 
 }
