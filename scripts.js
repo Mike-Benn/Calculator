@@ -16,6 +16,7 @@ const screenText = document.querySelector('.screen-text');
 const operationText = document.querySelector('.operation-text');
 const deleteBtn = document.querySelector('#delete-btn');
 const clearBtn = document.querySelector('#clear-btn');
+const negativeBtn = document.querySelector('#negative-btn');
 const equalsBtn = document.querySelector('#equals-btn');
 const zeroBtn = document.querySelector('#zero-btn');
 const oneBtn = document.querySelector('#one-btn');
@@ -68,7 +69,7 @@ function roundValue(num) {
         } else {
             let subStr = str.slice(1);
             let strArray = subStr.split(".");
-            let precision = 13 - strArray[0].length;
+            let precision = 14 - strArray[0].length;
             str = (parseFloat(str)).toFixed(precision);
             return str + "";
             
@@ -79,7 +80,9 @@ function roundValue(num) {
 
         } else {
             let strArray = str.split(".");
-            let precision = 13 - strArray[0].length;
+            console.log(strArray);
+            let precision = 14 - strArray[0].length;
+            console.log(precision);
             str = (parseFloat(str)).toFixed(precision);
             return str + "";
 
@@ -90,6 +93,8 @@ function roundValue(num) {
 
 // Handles arithmetic operations by checking what current operator is set to.  
 // Checks if value will be out of range of the calculator's limits and adjusts accordingly if it is capping the value off at it's max/min limit
+
+
 
 function operate() {
     if (operator === "/") {
@@ -168,8 +173,8 @@ function decimal() {
 
 }
 
-// Deletes one character from the end of the current screenText textContent value 
-// Changes decimal status to false if deleted character is decimal point
+// Deletes entire screenText textContent value setting it to "0"
+// Changes decimal status to false to account for a decimal potentially being deleted
 
 function del() {
     deleteBtn.addEventListener('click' , () => {
@@ -200,15 +205,9 @@ function clear() {
 function equals() {
     equalsBtn.addEventListener('click' , () => {
         if (operator !== null && firstNum !== null) {
-            if (screenText.textContent.split(".").length > 1) {
-                secondNum = parseFloat(screenText.textContent);
-                operate();
-                
-            } else {
-                secondNum = parseInt(screenText.textContent);
-                operate();
-                
-            }
+            secondNum = parseFloat(screenText.textContent);
+            operate();
+
         }
     })
 }
