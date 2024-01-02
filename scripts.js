@@ -215,6 +215,7 @@ function consecutiveOperator(str) {
     lastButton = "operator";
     operator = str;
     updateScreenText(str);
+    
 
 }
 
@@ -309,7 +310,7 @@ function clear() {
 
 function equals() {
     equalsBtn.addEventListener('click' , () => {
-        if (operator !== null && firstNum !== null) {
+        if (operator !== null && firstNum !== null && lastButton !== "operator" || operator!== null && firstNum !== null && answerNegative == true && lastButton !== "operator") {
             secondNum = parseFloat(screenText.textContent);
             operate();
 
@@ -404,6 +405,7 @@ function times() {
     timesBtn.addEventListener('click' , () => {
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
             consecutiveOperator("x");
+            answerNegative = false;
             
         } else if (firstNum !== null && operator !== "x") {
             changeOperator("x");
@@ -481,7 +483,8 @@ function minus() {
 function numberListener(str) {
     if (parseFloat(screenText.textContent) < 0) {
         if (screenText.textContent.length <= 15) {
-            if (lastButton === "operator" || lastButton === "equals" || answerNegative == true) {
+            if (lastButton === "operator" || lastButton === "equals" || lastButton === "negative") {
+                console.log(lastButton);
                 answerNegative = false;
                 negativeActive = false;
                 setScreenText(str);
@@ -498,7 +501,7 @@ function numberListener(str) {
 
     } else {
         if (screenText.textContent.length <= 14) {
-            if (lastButton === "operator" || lastButton === "equals" || answerNegative == true) {
+            if (lastButton === "operator" || lastButton === "equals" || lastButton === "negative") {
                 answerNegative = false;
                 negativeActive = false;
                 setScreenText(str);
