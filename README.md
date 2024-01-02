@@ -1,33 +1,27 @@
-# My Awesome Project
-Write a short sentence or two about this project and what it does. Be sure to include a link and a screenshot (we're front end devs so we can actually see our work!).
+# Calculator
+This project is a web-based calculator app that can be used inside a browser.  Users will be able to perform basic arithmetic by typing in expressions on the calculator using their mouse.
 
-**Link to project:** http://recruiters-love-seeing-live-demos.com/
+**Link to project:** https://mike-benn.github.io/Calculator
 
-![alt tag](http://placecorgi.com/1200/650)
+
 
 ## How It's Made:
 
-**Tech used:** HTML, CSS, JavaScript, Framework of choice
+**Tech used:** HTML, CSS, JavaScript
 
-Here's where you can go to town on how you actually built this thing. Write as much as you can here, it's totally fine if it's not too much just make sure you write *something*. If you don't have too much experience on your resume working on the front end that's totally fine. This is where you can really show off your passion and make up for that ten fold.
+This app is a collection of buttons and associated mouse listeners that execute mathematical expressions based on what the user punches in to the calculator.  For the most part values are captured from the screen's text and assigned to variables when the user presses an operation or the equals button.  Once the variables are set and the user clicks equals, or an operator, the calculator computes the result of the two values and the operator assigned and returns it to the bottom of the screen.  There is a separate box encompassing the top of the screen that displays what the user has input.  This calculator handles many things similarly to the Windows Calculator.
+
 
 ## Optimizations
-*(optional)*
 
-You don't have to include this section but interviewers *love* that you can not only deliver a final product that looks great but also functions efficiently. Did you write something then refactor it later and the result was 5x faster than the original implementation? Did you cache your assets? Things that you write in this section are **GREAT** to bring up in interviews and you can use this section as reference when studying for technical interviews!
+
+I think some easy optimizations I might consider with this project is the addition of some more common buttons that might be found on a calculator more advanced.  Calculations like square roots and exponents would probably be the next things I'd consider adding.  I'm pretty happy with the layout, sizing, and spacing of the buttons so if I was going to add more buttons I'd have to increase the size of the calculator and rearrange things.  I would also consider improving my code and how it handles the states of certain things like negatives and last button pressed.  I wasn't sure how to handle what the upper and lower limit of the calculator should be.  Maybe I'd consider increasing this but maybe not, it would depend on what other functions I add to the app.  It felt silly to add large upper and lower limits to a calculator that is performing the basic arithmetic operations.
 
 ## Lessons Learned:
 
-No matter what your experience level, being an engineer means continuously learning. Every time you build something you always have those *whoa this is awesome* or *wow I actually did it!* moments. This is where you should share those moments! Recruiters and interviewers love to see that you're self-aware and passionate about growing.
+This project was created after my Sketchit project and I think the biggest thing I can take away from this and partly from that one is that I need to improve how I manage states of certain things.  
 
-## Examples:
-Take a look at these couple examples that I have in my own portfolio:
 
-**Palettable:** https://github.com/alecortega/palettable
-
-**Twitter Battle:** https://github.com/alecortega/twitter-battle
-
-**Patch Panel:** https://github.com/alecortega/patch-panel
 
 
 
