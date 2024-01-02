@@ -275,6 +275,47 @@ function decimal() {
 
 }
 
+// Helper function that is called in main decimal function when the decimal point button is clicked
+// Appends decimal point to end of screenText textContent value if there isn't a decimal point already active on the current value
+
+function decimalHelper() {
+    if (decimalActive == false) {
+        if (parseInt(screenText.textContent) < 0) {
+            if (screenText.textContent.length <= 15) {
+                if (lastButton === "operator" || lastButton === "equals" || lastButton === "negative" && answerNegative == true) {
+                    answerNegative = false;
+                    negativeActive = false;
+                    decimalActive = true;
+                    screenText.textContent = "0.";
+                    lastButton = "decimal";
+
+                } else if (screenText.textContent.length < 14) {
+                    decimalActive = true;
+                    screenText.textContent = screenText.textContent + ".";
+                    lastButton = "decimal";
+
+                }
+            }
+        } else {
+            if (screenText.textContent.length <= 14) {
+                if (lastButton === "operator" || lastButton === "equals" || lastButton === "negative" && answerNegative == true) {
+                    answerNegative = false;
+                    negativeActive = false;
+                    decimalActive = true;
+                    screenText.textContent = "0.";
+                    lastButton = "decimal";
+
+                } else if (screenText.textContent.length < 14) {
+                    decimalActive = true;
+                    screenText.textContent = screenText.textContent + ".";
+                    lastButton = "decimal";
+
+                }
+            }
+        }
+    }
+}
+
 // Deletes entire screenText textContent value setting it to "0"
 // Changes decimal status and negative status to false to account for a decimal being deleted and negative being removed
 
@@ -284,7 +325,7 @@ function del() {
         decimalActive = false;
         negativeActive = false;
         answerNegative = false;
-
+        lastButton = null;
     })
 
 }
@@ -343,47 +384,6 @@ function negative() {
     })
 }
 
-// Helper function that is called in main decimal function when the decimal point button is clicked
-// Appends decimal point to end of screenText textContent value if there isn't a decimal point already active on the current value
-
-function decimalHelper() {
-    if (decimalActive == false) {
-        if (parseInt(screenText.textContent) < 0) {
-            if (screenText.textContent.length <= 15) {
-                if (lastButton === "operator" || lastButton === "equals" || lastButton === "negative" && answerNegative == true) {
-                    answerNegative = false;
-                    negativeActive = false;
-                    decimalActive = true;
-                    screenText.textContent = "0.";
-                    lastButton = "decimal";
-
-                } else if (screenText.textContent.length < 14) {
-                    decimalActive = true;
-                    screenText.textContent = screenText.textContent + ".";
-                    lastButton = "decimal";
-
-                }
-            }
-        } else {
-            if (screenText.textContent.length <= 14) {
-                if (lastButton === "operator" || lastButton === "equals" || lastButton === "negative" && answerNegative == true) {
-                    answerNegative = false;
-                    negativeActive = false;
-                    decimalActive = true;
-                    screenText.textContent = "0.";
-                    lastButton = "decimal";
-
-                } else if (screenText.textContent.length < 14) {
-                    decimalActive = true;
-                    screenText.textContent = screenText.textContent + ".";
-                    lastButton = "decimal";
-
-                }
-            }
-        }
-    }
-}
-
 
 
 // ###########################################################
@@ -427,6 +427,7 @@ function divide() {
     divideBtn.addEventListener('click' , () => {
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
             consecutiveOperator("/");
+            answerNegative = false;
             
         } else if (firstNum !== null && operator !== "/") {
             changeOperator("/");
@@ -444,6 +445,7 @@ function add() {
     addBtn.addEventListener('click' , () => {
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
             consecutiveOperator("+");
+            answerNegative = false;
             
         } else if (firstNum !== null && operator !== "+") {
             changeOperator("+");
@@ -461,6 +463,7 @@ function minus() {
     minusBtn.addEventListener('click' , () => {
         if (operator !== null && firstNum !== null && lastButton !== "operator") {
             consecutiveOperator("-");
+            answerNegative = false;
             
         } else if (firstNum !== null && operator !== "-") {
             changeOperator("-");
