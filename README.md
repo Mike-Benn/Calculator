@@ -19,7 +19,7 @@ I think some easy optimizations I might consider with this project is the additi
 
 ## Lessons Learned:
 
-This project was created after my Sketchit project and I think the biggest thing I can take away from this and partly from that one is that I need to improve how I manage states of certain things.  
+This project was created after my Sketchit project and I think the biggest thing I can take away from this and partly from that one is that I need to improve how I manage states of certain things.  I could've done a much better job tracking certain variables like the last button clicked and how that can be used better to my advantage.
 
 
 
