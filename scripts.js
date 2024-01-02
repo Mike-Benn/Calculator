@@ -59,6 +59,9 @@ function equalsReset() {
 }
 
 // Handles answer values and round them down when necessary to fit the calculator's character limit 
+// Accepts number and immediately checks if a negative number to adjust for character limit difference between negative and positive numbers
+// Splits the string at its decimal point and checks the length of the returned array to determine if number is a float or not
+// Finally calculates the precision required to ensure that value fits within the calculator's set character limit by subtracting the length
 
 function roundValue(num) {
     let str = num + "";
@@ -78,7 +81,7 @@ function roundValue(num) {
             } else if (strArray.length == 2) {
                 let precision = 13 - strArray[0].length;
                 str = (parseFloat(str)).toFixed(precision);
-                return str + "";
+                return parseFloat(str) + "";
 
             }
         } 
@@ -98,12 +101,14 @@ function roundValue(num) {
                 let precision;
                 if (13 - strArray[0].length < 0) {
                     precision = 0;
+
                 } else {
                     precision = 13 - strArray[0].length;
+
                 }
                 console.log(precision);
                 str = (parseFloat(str)).toFixed(precision);
-                return str + "";
+                return parseFloat(str) + "";
 
             }
         }
