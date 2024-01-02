@@ -116,67 +116,70 @@ function roundValue(num) {
 }
 
 // Handles arithmetic operations by checking what current operator is set to.  
-// Checks if value will be out of range of the calculator's limits and adjusts accordingly if it is capping the value off at it's max/min limit
-
-
+// Checks if value will be out of range of the calculator's limits and adjusts accordingly if it is capping the value off at it's max/min limit 
+// If value is within limit rounds to the nearest decimal place that allows value to fit into calculator's screen character limit
 
 function operate() {
     if (operator === "/") {
-        if (firstNum / secondNum > MAXIMUM_NUMBER) {
+        let total = firstNum / secondNum;
+        if (total > MAXIMUM_NUMBER) {
             screenText.textContent = MAXIMUM_NUMBER + "";
             equalsReset();
 
-        } else if (firstNum / secondNum < MINIMUM_NUMBER) {
+        } else if (total < MINIMUM_NUMBER) {
             screenText.textContent = MINIMUM_NUMBER + "";
             equalsReset();
 
         } else {
-            screenText.textContent = roundValue(firstNum / secondNum);
+            screenText.textContent = roundValue(total);
             equalsReset();
             
         }
 
     } else if (operator === "x") {
-        if (firstNum * secondNum > MAXIMUM_NUMBER) {
+        let total = firstNum * secondNum;
+        if (total > MAXIMUM_NUMBER) {
             screenText.textContent = MAXIMUM_NUMBER + "";
             equalsReset();
 
-        } else if (firstNum * secondNum < MINIMUM_NUMBER) {
+        } else if (total < MINIMUM_NUMBER) {
             screenText.textContent = MINIMUM_NUMBER + "";
             equalsReset();
 
         } else {
-            screenText.textContent = roundValue(firstNum * secondNum);
+            screenText.textContent = roundValue(total);
             equalsReset();
 
         }
 
     } else if (operator === "+") {
-        if (firstNum + secondNum > MAXIMUM_NUMBER) {
+        let total = firstNum + secondNum;
+        if (total > MAXIMUM_NUMBER) {
             screenText.textContent = MAXIMUM_NUMBER + "";
             equalsReset();
 
-        } else if (firstNum + secondNum < MINIMUM_NUMBER) {
+        } else if (total < MINIMUM_NUMBER) {
             screenText.textContent = MINIMUM_NUMBER + "";
             equalsReset();
 
         } else {
-            screenText.textContent = roundValue(firstNum + secondNum);
+            screenText.textContent = roundValue(total);
             equalsReset();
 
         }
         
     } else if (operator === "-") {
-        if (firstNum - secondNum > MAXIMUM_NUMBER) {
+        let total = firstNum - secondNum;
+        if (total > MAXIMUM_NUMBER) {
             screenText.textContent = MAXIMUM_NUMBER + "";
             equalsReset();
 
-        } else if (firstNum - secondNum < MINIMUM_NUMBER) {
+        } else if (total < MINIMUM_NUMBER) {
             screenText.textContent = MINIMUM_NUMBER + "";
             equalsReset();
 
         } else {
-            screenText.textContent = roundValue(firstNum - secondNum);
+            screenText.textContent = roundValue(total);
             equalsReset();
 
         }
