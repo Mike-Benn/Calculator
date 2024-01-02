@@ -350,7 +350,9 @@ function decimalHelper() {
     if (decimalActive == false) {
         if (parseInt(screenText.textContent) < 0) {
             if (screenText.textContent.length <= 15) {
-                if (lastButton === "operator" || lastButton === "equals") {
+                if (lastButton === "operator" || lastButton === "equals" || lastButton === "negative" && answerNegative == true) {
+                    answerNegative = false;
+                    negativeActive = false;
                     decimalActive = true;
                     screenText.textContent = "0.";
                     lastButton = "decimal";
@@ -364,7 +366,9 @@ function decimalHelper() {
             }
         } else {
             if (screenText.textContent.length <= 14) {
-                if (lastButton === "operator" || lastButton === "equals") {
+                if (lastButton === "operator" || lastButton === "equals" || lastButton === "negative" && answerNegative == true) {
+                    answerNegative = false;
+                    negativeActive = false;
                     decimalActive = true;
                     screenText.textContent = "0.";
                     lastButton = "decimal";
@@ -483,8 +487,7 @@ function minus() {
 function numberListener(str) {
     if (parseFloat(screenText.textContent) < 0) {
         if (screenText.textContent.length <= 15) {
-            if (lastButton === "operator" || lastButton === "equals" || lastButton === "negative") {
-                console.log(lastButton);
+            if (lastButton === "operator" || lastButton === "equals" || lastButton === "negative" && answerNegative == true) {
                 answerNegative = false;
                 negativeActive = false;
                 setScreenText(str);
