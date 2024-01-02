@@ -69,10 +69,18 @@ function roundValue(num) {
         } else {
             let subStr = str.slice(1);
             let strArray = subStr.split(".");
-            let precision = 14 - strArray[0].length;
-            str = (parseFloat(str)).toFixed(precision);
-            return str + "";
-            
+
+            if (strArray.length == 1) {
+                let precision = 14 - strArray[0].length;
+                str = (parseFloat(str)).toFixed(precision);
+                return str + "";
+
+            } else if (strArray.length == 2) {
+                let precision = 13 - strArray[0].length;
+                str = (parseFloat(str)).toFixed(precision);
+                return str + "";
+
+            }
         } 
     } else {
         if (str.length <= 14) {
@@ -80,15 +88,26 @@ function roundValue(num) {
 
         } else {
             let strArray = str.split(".");
-            console.log(strArray);
-            let precision = 14 - strArray[0].length;
-            console.log(precision);
-            str = (parseFloat(str)).toFixed(precision);
-            return str + "";
+            if (strArray.length == 1) {
+                let precision = 14 - strArray[0].length;
+                console.log(precision);
+                str = (parseFloat(str)).toFixed(precision);
+                return str + "";
 
+            } else if (strArray.length == 2) {
+                let precision;
+                if (13 - strArray[0].length < 0) {
+                    precision = 0;
+                } else {
+                    precision = 13 - strArray[0].length;
+                }
+                console.log(precision);
+                str = (parseFloat(str)).toFixed(precision);
+                return str + "";
+
+            }
         }
     }
-
 }
 
 // Handles arithmetic operations by checking what current operator is set to.  
@@ -257,7 +276,7 @@ function decimalHelper() {
 
 
 
-// The following functions erform several different tasks pertaining to the four common arithmetic operators and all behave very similarly
+// The following functions perform several different tasks pertaining to the four common arithmetic operators all of these functions behave very similarly
 
 // If firstNum and operator have already been assigned a value and last button pressed isn't an operator when this button is clicked, sets current screenText to secondNum and calls operate() 
 // Afterward it sets the result to firstNum and sets the operator to the operator button that was clicked
@@ -269,6 +288,8 @@ function decimalHelper() {
 
 
 // Multiplication
+
+
 
 function times() {
     timesBtn.addEventListener('click' , () => {
@@ -329,7 +350,34 @@ function times() {
             
     })
 }
+/*
+function times() {
+    timesBtn.addEventListener('click' , () => {
+        if (operator !== null && firstNum !== null && lastButton !== "operator") {
+            secondNum = parseFloat(screenText.textContent);
+            operate();
+            firstNum = parseFloat(screenText.textContent);
+            operationText.textContent = "" + firstNum + " × ";
+            operator = "x";
+            lastButton = "operator";
 
+        } else if (firstNum !== null && operator !== "x") {
+            operator = "x";
+            lastButton = "operator";
+            decimalActive = false;
+            operationText.textContent = "" + firstNum + " × ";
+
+        } else if (firstNum === null) {
+            firstNum = parseFloat(screenText.textContent);
+            operator = "x";
+            lastButton = "operator";
+            decimalActive = false;
+            operationText.textContent = "" + firstNum + " × ";
+
+        }
+    })
+}
+*/
 // Division
 
 function divide() {
